@@ -21,13 +21,15 @@
 		if (progval === 0) {
 			inter = setInterval(() => {
 				progval += 1;
+				if (progval >= 100) {
+					clearInterval(inter);
+					if (dialog.open) {
+						dialog.close();
+						progval = 0;
+					}
+				}
 			}, 20);
 		}
-	}
-	$: if (progval >= 100) {
-		clearInterval(inter);
-		dialog.close();
-		progval = 0;
 	}
 
 	$: console.log(form);
